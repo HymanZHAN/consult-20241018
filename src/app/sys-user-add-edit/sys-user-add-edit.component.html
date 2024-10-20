@@ -1,52 +1,65 @@
 <div class="container">
-    <h2 mat-dialog-title>{{ !isEditMode ? '新增用戶' : '修改用戶' }}</h2>
+  <h2 mat-dialog-title>{{ !isEditMode ? "新增用戶" : "修改用戶" }}</h2>
 
-    <form [formGroup]="userForm" class="user-form">
-        <mat-form-field appearance="outline" *ngIf="isEditMode">
-            <mat-label>用戶ID</mat-label>
-            <input matInput formControlName="user_id" [readonly]="isEditMode">
-            <button  mat-icon-button matSuffix disabled>
-                <mat-icon>lock</mat-icon>
-            </button>
-        </mat-form-field>
+  <form [formGroup]="userForm" class="user-form">
+    @if (isEditMode) {
+      <mat-form-field appearance="outline">
+        <mat-label>用戶ID</mat-label>
+        <input matInput formControlName="user_id" [readonly]="isEditMode" />
+        <button mat-icon-button matSuffix disabled>
+          <mat-icon>lock</mat-icon>
+        </button>
+      </mat-form-field>
+    }
 
-        <mat-form-field appearance="outline">
-            <mat-label>用戶名稱</mat-label>
-            <input matInput formControlName="user_name" placeholder="輸入用戶名稱" [readonly]="isEditMode">
-            <mat-error *ngIf="userForm.get('user_name')?.hasError('required')">用戶名稱為必填項</mat-error>
-            <mat-error *ngIf="userForm.get('user_name')?.hasError('userNameExists')">用戶名稱已存在</mat-error>
-            <button *ngIf="isEditMode" mat-icon-button matSuffix disabled>
-                <mat-icon>lock</mat-icon>
-            </button>
-        </mat-form-field>
-        
-        <mat-form-field appearance="outline">
-            <mat-label>密碼</mat-label>
-            <input matInput [type]="passwordVisible ? 'text' : 'password'" formControlName="password" placeholder="輸入密碼">
-            <mat-icon matSuffix (click)="togglePasswordVisibility()" style="cursor: pointer;">
-                {{ passwordVisible ? 'visibility' : 'visibility_off' }}
-            </mat-icon>
-            <mat-error *ngIf="userForm.get('password')?.hasError('required')">密碼為必填項</mat-error>
-            <mat-error *ngIf="userForm.get('password')?.hasError('passwordErrors')">密碼至少8個字元,包含大寫字母、小寫字母、數字和特殊字符</mat-error>
-        </mat-form-field>
-        
-        <section class="slide-toggle-section">
-            <mat-slide-toggle formControlName="valid" color="primary">
-                是否有效
-            </mat-slide-toggle>
-        </section>
+    <mat-form-field appearance="outline">
+      <mat-label>用戶名稱</mat-label>
+      <input
+        matInput
+        formControlName="user_name"
+        placeholder="輸入用戶名稱"
+        [readonly]="isEditMode"
+      />
+      @if (userForm.get("user_name")?.hasError("required")) {
+        <mat-error>用戶名稱為必填項</mat-error>
+      } @else if (userForm.get("user_name")?.hasError("userNameExists")) {
+        <mat-error>用戶名稱已存在</mat-error>
+      }
+      <button *ngIf="isEditMode" mat-icon-button matSuffix disabled>
+        <mat-icon>lock</mat-icon>
+      </button>
+    </mat-form-field>
 
-        <section class="slide-toggle-section">
-            <mat-slide-toggle formControlName="role" color="primary">
-                是否為管理員
-            </mat-slide-toggle>
-        </section>
+    <mat-form-field appearance="outline">
+      <mat-label>密碼</mat-label>
+      <input
+        matInput
+        [type]="passwordVisible ? 'text' : 'password'"
+        formControlName="password"
+        placeholder="輸入密碼"
+      />
+      <mat-icon matSuffix (click)="togglePasswordVisibility()" style="cursor: pointer">
+        {{ passwordVisible ? "visibility" : "visibility_off" }}
+      </mat-icon>
+      <mat-error *ngIf="userForm.get('password')?.hasError('required')">密碼為必填項</mat-error>
+      <mat-error *ngIf="userForm.get('password')?.hasError('passwordErrors')"
+        >密碼至少8個字元,包含大寫字母、小寫字母、數字和特殊字符</mat-error
+      >
+    </mat-form-field>
 
-        <footer class="form-actions">
-            <button mat-raised-button color="primary" (click)="saveUser()">
-                {{!isEditMode ? '新增' : '修改' }}
-            </button>
-            <button mat-raised-button color="warn" (click)="closeDialog()">取消</button>
-        </footer>
-    </form>
+    <section class="slide-toggle-section">
+      <mat-slide-toggle formControlName="valid" color="primary"> 是否有效 </mat-slide-toggle>
+    </section>
+
+    <section class="slide-toggle-section">
+      <mat-slide-toggle formControlName="role" color="primary"> 是否為管理員 </mat-slide-toggle>
+    </section>
+
+    <footer class="form-actions">
+      <button mat-raised-button color="primary" (click)="saveUser()">
+        {{ !isEditMode ? "新增" : "修改" }}
+      </button>
+      <button mat-raised-button color="warn" (click)="closeDialog()">取消</button>
+    </footer>
+  </form>
 </div>
