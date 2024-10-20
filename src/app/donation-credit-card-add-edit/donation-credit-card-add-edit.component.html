@@ -1,0 +1,148 @@
+<div class="page-container">
+  <div class="page-header">
+    <h1>
+      <b>{{ isEditMode ? "信用卡修改" : "信用卡添加" }}</b>
+    </h1>
+  </div>
+
+  <div class="form-wrapper">
+    <form class="donor-form" [formGroup]="donationCreditCardForm">
+      <!-- Row 1: 信用卡卡號 -->
+      <!-- <div class="form-row"> -->
+      <mat-form-field class="input-item" appearance="outline">
+        <mat-label>信用卡卡號</mat-label>
+        <input
+          matInput
+          formControlName="cd_id"
+          placeholder="請輸入信用卡號"
+          required
+          [readonly]="isEditMode"
+        />
+        <button *ngIf="isEditMode" mat-icon-button matSuffix disabled>
+          <mat-icon>lock</mat-icon>
+        </button>
+      </mat-form-field>
+      <!-- </div> -->
+      <!-- Row 2: 信用卡授權書號 -->
+      <!-- <div class="form-row"> -->
+      <mat-form-field class="input-item" appearance="outline">
+        <mat-label>信用卡授權書號</mat-label>
+        <input
+          matInput
+          formControlName="cd_authori_id"
+          placeholder="請輸入信用卡授權書號"
+        />
+      </mat-form-field>
+      <!-- </div> -->
+
+      <!-- Row 3: 信用卡有效年月 & 收據型態 -->
+      <!-- <div class="form-row"> -->
+      <mat-form-field class="input-item" appearance="outline">
+        <mat-label>信用卡有效年</mat-label>
+        <input matInput formControlName="cd_valid_year" placeholder="24" />
+      </mat-form-field>
+      <mat-form-field class="input-item" appearance="outline">
+        <mat-label>信用卡有效月</mat-label>
+        <input matInput formControlName="cd_valid_month" placeholder="04" />
+      </mat-form-field>
+      <mat-form-field class="input-item col-start-2" appearance="outline">
+        <mat-label>收據型態</mat-label>
+        <mat-select formControlName="receipt_kind" placeholder="請選擇收據型態">
+          <mat-option value="Y">Y_定期採年度收據</mat-option>
+          <mat-option value="M">M_定期採每月收據</mat-option>
+          <mat-option value="S">S_單次捐款收據</mat-option>
+          <mat-option value="T">T_單次捐款年度收據</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <!-- </div> -->
+
+      <!-- Row 4: 捐款金額 -->
+      <!-- <div class="form-row half"> -->
+      <mat-form-field class="input-item" appearance="outline">
+        <mat-label>捐款金額</mat-label>
+        <input
+          matInput
+          type="number"
+          formControlName="cd_amount"
+          placeholder="請輸入捐款金額"
+        />
+      </mat-form-field>
+      <!-- </div> -->
+
+      <!-- Row 5: 信用卡捐款年月起 -->
+      <!-- <div class="form-row half"> -->
+      <mat-form-field class="input-item" appearance="outline">
+        <mat-label>信用卡捐款年月起</mat-label>
+        <input
+          matInput
+          formControlName="donation_start_YM"
+          placeholder="2024-04"
+        />
+      </mat-form-field>
+      <!-- </div> -->
+
+      <!-- Row 6: 信用卡捐款年月迄 -->
+      <!-- <div class="form-row half"> -->
+      <mat-form-field class="input-item" appearance="outline">
+        <mat-label>信用卡捐款年月迄</mat-label>
+        <input
+          matInput
+          formControlName="donation_end_YM"
+          placeholder="2024-12"
+        />
+      </mat-form-field>
+      <!-- </div> -->
+
+      <!-- 備註欄 ，佔據第五六七行的右側-->
+      <div class="remarks-section">
+        <mat-form-field class="input-item" appearance="outline">
+          <mat-label>備註</mat-label>
+          <textarea
+            matInput
+            formControlName="memo"
+            rows="8"
+            placeholder="備註"
+          ></textarea>
+        </mat-form-field>
+      </div>
+
+      <!-- Row 7: 捐款者身份字號 -->
+      <!-- <div class="form-row"> -->
+      <mat-form-field class="input-item col-span-2" appearance="outline">
+        <mat-label>捐款者身份字號/公司統編</mat-label>
+        <input
+          matInput
+          formControlName="donor_id"
+          placeholder="請輸入捐款者身分證字號"
+          #donorId
+        />
+        <button
+          mat-raised-button
+          (click)="
+            searchDonor(donorId.value);
+            $event.preventDefault();
+            $event.stopPropagation()
+          "
+          class="find-donor-btn"
+          type="button"
+        >
+          查詢
+        </button>
+      </mat-form-field>
+      <!-- </div> -->
+    </form>
+  </div>
+
+  <!-- 資訊顯示區 -->
+  <div class="info-display">
+    <!-- <app-donor-detail *ngIf="donor" [donor]="this.donor"></app-donor-detail>
+        <p *ngIf="!donor">捐款者不存在</p> -->
+  </div>
+  <!-- 操作按鈕 -->
+  <div class="form-actions">
+    <button mat-raised-button color="primary" (click)="onSubmit()">
+      {{ isEditMode ? "修改" : "新增" }}
+    </button>
+    <button mat-raised-button color="warn" (click)="cancel()">取消</button>
+  </div>
+</div>

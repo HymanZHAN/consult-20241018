@@ -1,0 +1,59 @@
+<div class="user-detail-container">
+  <h2>{{ user.name }}'s Details</h2>
+  <mat-tab-group>
+    <mat-tab label="User Details">
+      <div>
+        <p><strong>ID:</strong> {{ user.id }}</p>
+        <p><strong>Name:</strong> {{ user.name }}</p>
+        <p><strong>Email:</strong> {{ user.email }}</p>
+        <p><strong>Phone:</strong> {{ user.phone }}</p>
+        <p><strong>Address:</strong> {{ user.address }}</p>
+      </div>
+    </mat-tab>
+    <mat-tab label="Donation History">
+      <mat-table [dataSource]="donations" class="mat-elevation-z8">
+        <!-- Donation ID Column -->
+        <ng-container matColumnDef="donationId">
+          <mat-header-cell *matHeaderCellDef> Donation ID </mat-header-cell>
+          <mat-cell *matCellDef="let donation">
+            {{ donation.id }}
+          </mat-cell>
+        </ng-container>
+
+        <!-- Donation Amount Column -->
+        <ng-container matColumnDef="amount">
+          <mat-header-cell *matHeaderCellDef> Amount </mat-header-cell>
+          <mat-cell *matCellDef="let donation">
+            {{ donation.amount | currency }}
+          </mat-cell>
+        </ng-container>
+
+        <!-- Donation Date Column -->
+        <ng-container matColumnDef="date">
+          <mat-header-cell *matHeaderCellDef> Date </mat-header-cell>
+          <mat-cell *matCellDef="let donation">
+            {{ donation.date | date: "shortDate" }}
+          </mat-cell>
+        </ng-container>
+
+        <!-- Donation Details Column -->
+        <ng-container matColumnDef="details">
+          <mat-header-cell *matHeaderCellDef> Details </mat-header-cell>
+          <mat-cell *matCellDef="let donation">
+            {{ donation.details }}
+          </mat-cell>
+        </ng-container>
+
+        <mat-header-row
+          *matHeaderRowDef="['donationId', 'amount', 'date', 'details']"
+        ></mat-header-row>
+        <mat-row
+          *matRowDef="
+            let row;
+            columns: ['donationId', 'amount', 'date', 'details']
+          "
+        ></mat-row>
+      </mat-table>
+    </mat-tab>
+  </mat-tab-group>
+</div>

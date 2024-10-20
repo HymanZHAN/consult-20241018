@@ -1,0 +1,99 @@
+.page-container {
+  margin: 20px;
+  padding: 20px;
+  background-color: #f9f9f9;
+}
+
+.page-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+h1 {
+  font-size: 24px;
+  color: #333;
+}
+
+.form-wrapper {
+  border: 2px solid #000;
+  padding: 20px;
+  border-radius: 8px;
+  background-color: #fff;
+}
+
+.donor-form {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.form-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.input-item {
+  flex: 1 1 45%;
+  max-width: 60%;
+}
+
+.mat-form-field {
+  width: 100%;
+}
+
+.mat-form-field .mat-form-field-infix {
+  padding: 0;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.mat-raised-button {
+  font-size: 14px;
+}
+
+.table-wrapper {
+  margin-top: 20px;
+}
+
+.donation-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+:host ::ng-deep .mat-sort-header-container {
+  justify-content: center;
+}
+
+.donation-table th,
+.donation-table td {
+  padding: 8px 16px;
+  text-align: center; /* 文字置中 */
+}
+
+.donation-table th {
+  background-color: #f0f0f0;
+  font-weight: bold;
+}
+
+.mat-row {
+  cursor: pointer;
+}
+
+.mat-header-row {
+  background-color: #e0e0e0;
+}
+
+.mat-no-data-row {
+  text-align: center;
+}
+
+.mat-paginator {
+  margin-top: 20px;
+}

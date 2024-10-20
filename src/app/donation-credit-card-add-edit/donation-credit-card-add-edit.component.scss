@@ -1,0 +1,103 @@
+.page-container {
+  margin: auto 10px;
+  padding: 20px;
+}
+
+.form-wrapper {
+  border: 2px solid #000;
+  padding: 20px;
+  padding-bottom: 0;
+  border-radius: 8px;
+  background-color: #fff;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: auto auto auto auto auto auto auto;
+  column-gap: 1rem;
+}
+
+.col-start-1 {
+  grid-column-start: 1;
+}
+
+.col-start-2 {
+  grid-column-start: 2;
+}
+
+.col-span-2 {
+  grid-column: span 2 / span 2;
+}
+
+.donor-form {
+  display: contents; /* This makes the form inherit the grid layout of its parent */
+}
+
+.form-row {
+  grid-column: 1/3;
+  display: flex;
+  align-items: center; /* Align items vertically centered */
+  gap: 10px; /* Space between input and button */
+  .input-item {
+    flex: 1 1 45%; /* 每個表單項目分配約45%的寬度 */
+    max-width: 60%; /* 最大寬度設定為60% */
+  }
+}
+.half {
+  gap: 0px;
+  grid-column: 1/2;
+  .input-item {
+    flex: 1 1 45%; /* 每個表單項目分配約45%的寬度 */
+    max-width: 100%; /* 最大寬度設定為60% */
+  }
+}
+
+.input-item {
+  flex: 1; /* Allow the input to take up available space */
+}
+
+.find-donor-btn {
+  position: absolute; /* 绝对定位按钮 */
+  right: 0; /* 按钮靠右 */
+  top: 50%; /* 垂直居中按钮 */
+  transform: translateY(-50%); /* 调整按钮的位置，使其完全居中 */
+  height: 40px; /* 按钮高度 */
+  width: 80px; /* 按钮宽度 */
+  background-color: rgba(169, 169, 169, 0.5); /* 灰色半透明背景 */
+  color: rgba(0, 0, 0, 0.8); /* 黑色文本稍微透明 */
+  border: 1px solid rgba(169, 169, 169, 0.5); /* 与背景色相同的边框 */
+  border-radius: 4px; /* 圆角按钮 */
+  display: flex;
+  align-items: center; /* 垂直居中文本 */
+  justify-content: center; /* 水平居中文本 */
+  font-size: 14px; /* 文本大小 */
+  cursor: pointer; /* 指针悬停时的样式 */
+  box-shadow: none; /* 去除阴影 */
+  transition: background-color 0.3s ease; /* 平滑背景色过渡 */
+}
+
+.find-donor-btn:hover {
+  background-color: rgba(169, 169, 169, 0.7); /* 鼠标悬停时稍微加深颜色 */
+  border-color: rgba(169, 169, 169, 0.7); /* 悬停时边框颜色加深 */
+}
+
+.remarks-section {
+  grid-column: 2; /* Place in the second column */
+  grid-row: 4 / 7; /* Span across rows 1 to 7 */
+  display: flex;
+  align-items: center;
+}
+
+.info-display {
+  grid-column: 1 / 4; /* Stretch across all columns */
+  border: 1px solid #000;
+  padding: 10px;
+  margin-top: 10px;
+  border-radius: 8px;
+}
+
+.form-actions {
+  grid-column: 1 / 4; /* Stretch across all columns */
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 20px;
+}
