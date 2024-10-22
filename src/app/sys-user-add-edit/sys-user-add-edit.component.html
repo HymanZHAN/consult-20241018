@@ -47,6 +47,23 @@
       >
     </mat-form-field>
 
+    <mat-form-field appearance="outline">
+      <mat-label>確認密碼</mat-label>
+      <input
+        matInput
+        [type]="passwordVisible ? 'text' : 'password'"
+        formControlName="confirmPassword"
+        placeholder="請再次密碼"
+      />
+      <mat-icon matSuffix (click)="togglePasswordVisibility()" style="cursor: pointer">
+        {{ passwordVisible ? "visibility" : "visibility_off" }}
+      </mat-icon>
+      <mat-error *ngIf="userForm.get('confirmPassword')?.hasError('required')"
+        >請再次輸入密碼</mat-error
+      >
+      <mat-error *ngIf="userForm.errors?.['passwordMismatch']">密碼不一致</mat-error>
+    </mat-form-field>
+
     <section class="slide-toggle-section">
       <mat-slide-toggle formControlName="valid" color="primary"> 是否有效 </mat-slide-toggle>
     </section>

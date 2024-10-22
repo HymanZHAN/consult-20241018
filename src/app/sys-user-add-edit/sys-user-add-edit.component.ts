@@ -1,7 +1,11 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, RequiredValidator, Validators } from '@angular/forms';
 import { SysUserService } from './sys-user.service'; // 引入 SysUserService
-import { validPasswordValidator, validUserNameValidator } from './validators';
+import {
+  confirmPasswordValidator,
+  validPasswordValidator,
+  validUserNameValidator,
+} from './validators';
 @Component({
   selector: 'app-sys-user-add-edit',
   templateUrl: './sys-user-add-edit.component.html',
@@ -16,21 +20,27 @@ export class SysUserAddEditComponent implements OnInit, AfterViewInit {
     private fb: FormBuilder,
     private sysUserService: SysUserService, // 注入 SysUserService
   ) {
-    this.userForm = this.fb.group({
-      user_id: [],
-      // user_name: ['', [validUserNameValidator(this.sysUserService)]],
-      user_name: [
-        '',
-        {
-          validators: [Validators.required],
-          asyncValidators: [validUserNameValidator(this.sysUserService)],
-        },
-      ],
-      password: ['', [validPasswordValidator()]],
-      create_time: [],
-      valid: [true],
-      role: [true],
-    });
+    this.userForm = this.fb.group(
+      {
+        user_id: [],
+        // user_name: ['', [validUserNameValidator(this.sysUserService)]],
+        user_name: [
+          '',
+          {
+            validators: [Validators.required],
+            asyncValidators: [validUserNameValidator(this.sysUserService)],
+          },
+        ],
+        password: ['', [validPasswordValidator]],
+        confirmPassword: ['', [Validators.required]],
+        create_time: [],
+        valid: [true],
+        role: [true],
+      },
+      {
+        validators: confirmPasswordValidator,
+      },
+    );
   }
 
   ngOnInit() {}
